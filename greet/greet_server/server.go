@@ -10,18 +10,18 @@ import (
 	"google.golang.org/grpc"
 )
 
-type server struct {
+type Server struct {
 	greetpb.UnimplementedGreetServiceServer
 }
 
-func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
+func (*Server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
+	fmt.Printf("Greet function was invoked with %v", req)
 	firstName := req.GetGreeting().GetFirstName()
 	result := "Hello " + firstName
 	res := &greetpb.GreetResponse {
 		Result: result,
 	}
 	return res, nil
-
 }
 
 func main() {
@@ -38,5 +38,5 @@ func main() {
 		log.Fatalf("Failed to server: %v", err)
 	}
 
-	greetpb.RegisterGreetServiceServer(s, &server{})
+	greetpb.RegisterGreetServiceServer(s, &Server{})
 }
