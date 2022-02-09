@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"greet/greet/greetpb"
+
 	"log"
 
+	"github.com/greet/pb"
 	"google.golang.org/grpc"
 )
 
@@ -18,15 +19,15 @@ func main() {
 	}
 	defer cc.Close()
 
-	c := greetpb.NewGreetServiceClient(cc)
+	c := pb.NewGreetServiceClient(cc)
 
 	doUnary(c)
 }
 
-func doUnary(c greetpb.GreetServiceClient) {
+func doUnary(c pb.GreetServiceClient) {
 	fmt.Println("Starting to do a Unary gRPC...")
-	req := &greetpb.GreetRequest{
-		Greeting: &greetpb.Greeting{
+	req := &pb.GreetRequest{
+		Greeting: &pb.Greeting{
 			FirstName: "Wesley",
 			LastName: "Pereira",
 		},

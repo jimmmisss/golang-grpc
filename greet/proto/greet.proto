@@ -1,7 +1,6 @@
 syntax = "proto3";
 
-package greet;
-option go_package="greet/greetpb";
+option go_package="/pb";
 
 message Greeting {
     string first_name = 1;
@@ -18,5 +17,5 @@ message GreetResponse {
 
 service GreetService {
     // Unary
-    rpc Greet(GreetRequest) returns (GreetResponse){};
+    rpc Greet (GreetRequest) returns (GreetResponse) {};
 }
